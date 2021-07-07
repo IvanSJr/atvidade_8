@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch axios vue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app">
+        <div class="container d-flex justify-content-center" v-for="dado in info">
+            <div class="form-row align-items-center">
+                
+            </div>
+            <div class="card" style="width: 18rem;" >
+                <img class="card-img-top" :src="dado.avatar_url" alt="Imagem do usuário">
+                <div class="card-body">
+                    <h3 class="card-title">{{dado.name}}</h5>
+                    <h5 class="card-text">Usuário: {{dado.login}}</p>
+                    <p class="card-text">Bio: {{dado.bio}}</p>
+                    <p class="card-text">Repositórios: {{dado.public_repos}} repositórios públicos</p>
+                    <a :href="dado.html_url"class="btn btn-primary">Link para o git do {{dado.login}}</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+        el: '#app',
+        data () {
+            return {
+            info: null,
+            usuario: "IvanSJr",
+            }
+        },
+        mounted () {
+            axios.get(`https://api.github.com/users/${this.usuario}`)
+            .then(response => (this.info = response))
+        }
+        })
+    </script>
+</body>
+</html>
